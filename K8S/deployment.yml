@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-app
+  namespace: python-flask-app  
+  labels:
+    app: flask-python-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flask-python-app
+  template:
+    metadata:
+      labels:
+        app: flask-python-app
+    spec:
+      containers:
+      - name: flask-app
+        image: mohamedmtolba/project-app
+        ports:
+        - containerPort: 5000
+        env:  
+        - name: FLASK_ENV
+          value: "development" 
